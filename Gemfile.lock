@@ -55,6 +55,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
+    ws2812 (0.0.6)
 
 PLATFORMS
   ruby
@@ -65,6 +66,7 @@ DEPENDENCIES
   sinatra
   thin
   twitter
+  ws2812
 
 BUNDLED WITH
    1.16.2
