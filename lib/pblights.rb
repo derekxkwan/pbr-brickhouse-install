@@ -2,12 +2,12 @@
 
 # require 'ws2812'
 
-module pblights
+module PbLights
 
   MAX_BRIGHTNESS = 100
   
   class Light
-    attr_reader :id, :address
+    attr_reader :id, :address, :brightness
     
     def initialize(id = 0, address = -1)
       @id = id
@@ -19,6 +19,7 @@ module pblights
       end
       
       @color = [255, 255, 255]
+      @brightness = 0
     end
 
     def set_brightness(brightness)
@@ -32,18 +33,18 @@ module pblights
   end
 
   class Lightbank
-    attr_reader :lights
+    attr_reader :lights, :size
     attr_accessor :rand_on, :grain
     #grain = sleep time in seconds, fade_time is in seconds
     def initialize(n = 5, fade_time = 1, grain = 0.01)
-      @n = n > 1 ? n.floor : 1
-      @lights = Array.new(@n){|x| Light.new(x)}
+      @size = n > 1 ? n.floor : 1
+      @lights = Array.new(@size){|x| Light.new(x)}
       @fade_time = fade_time > 0 ? fade_time : 1
       @value = 0
       @fading = false
       @rand_on = true
-      @state = Array.new(@n){0}
-      @prev_state = Array.new(@n){0}
+      @state = Array.new(@size){0}
+      @prev_state = Array.new(@size){0}
       @grain = grain
     end
 
@@ -67,8 +68,8 @@ module pblights
 
     def set_value(val)
       @prev_state = @state
-      val = val < 0 ? 0 : (val > @n ? @n : val)
-      @state = [1] * val + [0] * (@n - val)
+      val = val < 0 ? 0 : (val > @size ? @size : val)
+      @state = [1] * val + [0] * (@size - val)
       @state.shuffle! if @rand_on
       if @state != @prev_state
         fade_brightness
@@ -78,6 +79,11 @@ module pblights
     def set_color(color)
       @lights.each{|x| x.set_color(color)}
       end
+
+    def get_brightness
+      return @lights.map{|x| x.brightness}
+    end
+
     end
   
 end          
