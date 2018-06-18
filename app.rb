@@ -1,5 +1,5 @@
 CUR_PATH = File.expand_path('..', __FILE__)
-TEXT_SRC = CUR_PATH + "/text_src.txt"
+TEXT_SRC = CUR_PATH + "/resources/text_src.txt"
 
 $:.unshift(CUR_PATH)
 

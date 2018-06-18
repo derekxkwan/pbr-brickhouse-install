@@ -5,7 +5,7 @@ class PbText
   
   def initialize(text_path)
     @text_path = text_path
-    populate_text(text_path)
+    populate_text
     @r = Random.new
     @loaded = false
     @len = 0

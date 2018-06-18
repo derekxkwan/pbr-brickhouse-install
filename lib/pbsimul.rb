@@ -1,12 +1,12 @@
 require 'gosu'
 
 class InstallSim < Gosu::Window
-  W = 640
-  H = 480
-  GAP = 30
-  X_BORDER = 10
-  Y_BORDER = 10
-  SPACE = ((InstallSim::W/2.0)-(InstallSim::GAP+InstallSim::X_BORDER))
+  W = 1024
+  H = 768
+  GAP = InstallSim::W * 0.1
+  X_BORDER = InstallSim::W * 0.01
+  Y_BORDER = InstallSim::H * 0.01
+  SPACE = ((InstallSim::W/2.0)-(InstallSim::GAP/2.0+InstallSim::X_BORDER))
   
   RES = File.expand_path('../../resources', __FILE__)
   
@@ -30,7 +30,7 @@ class InstallSim < Gosu::Window
     to_draw.each_with_index do |clr,idx|
       cur_x = offset + @spacing * idx
       cur_y = InstallSim::Y_BORDER
-      cur_w = @spacing-InstallSim::GAP
+      cur_w = @spacing*0.75
       cur_h = InstallSim::H-(2.0*InstallSim::Y_BORDER)
       draw_rect(cur_x, cur_y, cur_w, cur_h, clr)
       end
@@ -40,7 +40,7 @@ class InstallSim < Gosu::Window
     left_bank_vals = @left_bank.get_brightness.map{|x| brightness_to_val(x)}
     right_bank_vals = @right_bank.get_brightness.map{|x| brightness_to_val(x)}
     @left_draw.each_with_index{|x,idx| x.value = left_bank_vals[idx]}
-    @right_draw.each_with_index{|x,idx| x.value = left_bank_vals[idx]}
+    @right_draw.each_with_index{|x,idx| x.value = right_bank_vals[idx]}
   end
   
   def update
