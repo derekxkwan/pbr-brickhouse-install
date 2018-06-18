@@ -5,11 +5,15 @@ $:.unshift(CUR_PATH)
 
 require 'lib/pblights'
 require 'lib/pbsimul'
-require 'lib/pbtext'
+require 'lib/pbinstall'
 
+
+threads = []
 
 left_bank = PbLights::Lightbank.new(5)
 right_bank = PbLights::Lightbank.new(5)
 
-view = Thread.new{InstallSim.new(left_bank, right_bank).show}
-view.join
+my_app = PbMainProc.new(TEXT_SRC, left_bank, right_bank)
+threads << Thread.new{my_app.run}
+threads << Thread.new{InstallSim.new(left_bank, right_bank).show}
+threads.each{|t| t.join}

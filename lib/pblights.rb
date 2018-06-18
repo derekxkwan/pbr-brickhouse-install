@@ -67,11 +67,11 @@ module PbLights
       end  
 
     def set_value(val)
-      @prev_state = @state
       val = val < 0 ? 0 : (val > @size ? @size : val)
       @state = [1] * val + [0] * (@size - val)
       @state.shuffle! if @rand_on
       if @state != @prev_state
+        @prev_state = @state
         fade_brightness
       end
     end

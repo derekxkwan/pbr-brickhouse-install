@@ -16,7 +16,7 @@ class PbText
     @size = @texts.size
     end
 
-  def load-path(new_path)
+  def load_path(new_path)
     if new_path != @text_path
       @text_path = new_path
       populate_text
