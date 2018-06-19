@@ -1,0 +1,6 @@
+misc/.twitter_creds.txt
+resources/text_src.txt
+*~
+ino/.pioenvs
+ino/.piolibdeps
+ino/.clang_complete

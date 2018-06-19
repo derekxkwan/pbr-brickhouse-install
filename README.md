@@ -1,2 +1,2 @@
-# pbr-brickhouse-install
-ideas for ruby based installation using rpi
+# polyb-brickhouse-install
+ideas for ruby (or arduino) based installation using rpi
